@@ -13,6 +13,7 @@ async function bootstrap() {
   const PORT = configService.get<number>('PORT');
 
   await app.listen(PORT);
+  
   console.info(`Reciver application is running on port: ${PORT}`);
 }
 bootstrap();
