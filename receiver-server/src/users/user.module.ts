@@ -5,6 +5,7 @@ import { UsersController } from './user.controller';
 import { UsersService } from './user.service';
 import { UserAddProducerQueue } from '../queue/producers/user-add.producer';
 import { QUEUECONFIG } from '../queue/config/queue.config';
+import { Utility } from '../helpers/utils.helper';
 
 @Module({
   imports: [
@@ -12,6 +13,10 @@ import { QUEUECONFIG } from '../queue/config/queue.config';
     ...QUEUECONFIG,
   ],
   controllers: [UsersController],
-  providers: [UsersService, UserAddProducerQueue],
+  providers: [
+    Utility,
+    UsersService,
+    UserAddProducerQueue
+  ],
 })
-export class UsersModule {}
+export class UsersModule { }

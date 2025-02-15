@@ -3,11 +3,13 @@ import { Response } from 'express';
 import { UserDTO } from './dto/user.dto';
 import { UsersService } from './user.service';
 import { UserAddProducerQueue } from '../queue/producers/user-add.producer';
+import { Utility } from '../helpers/utils.helper';
 
 @Controller('users')
 export class UsersController {
 
   constructor(
+    private readonly utils: Utility,
     private readonly usersService: UsersService,
     private readonly userAddProducerQueue: UserAddProducerQueue,
   ) { }
@@ -27,6 +29,8 @@ export class UsersController {
         HttpStatus.CONFLICT
       );
     }
+
+    payload.id = this.utils.generateUUID();
 
     const response = await this.usersService.createUser(payload);
 
