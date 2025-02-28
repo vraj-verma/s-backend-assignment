@@ -1,22 +1,26 @@
 version: "3.8"
 
 services:
-  listener-server:
-    build: ./listener-server
-    ports:
-      - "7001:7001"
-    volumes:
-      - ./listener-server:/app
-    environment:
-      - NODE_ENV=production
-    depends_on:
-      - receiver-server
-
   receiver-server:
-    build: ./receiver-server
+    build: 
+      context: ./receiver-server  
+      dockerfile: Dockerfile.receiver    
+    container_name: receiver-server
     ports:
       - "8001:8001"
     volumes:
       - ./receiver-server:/app
-    environment:
-      - NODE_ENV=production
+      - /app/node_modules
+    command: npm run start
+
+  listener-server:
+    build: 
+      context: ./listener-server 
+      dockerfile: Dockerfile.listener    
+    container_name: listener-server
+    ports:
+      - "7001:7001"
+    volumes:
+      - ./listener-server:/app
+      - /app/node_modules
+    command: npm run start
