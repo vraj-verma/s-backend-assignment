@@ -18,7 +18,7 @@ Before you begin, make sure you have the following installed on your machine:
 ### 1. Clone the Repository
 ```sh
 git clone <repository_url>
-cd s_assignment
+cd s-backend-assignment
 ```
 
 
